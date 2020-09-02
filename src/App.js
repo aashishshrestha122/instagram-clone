@@ -7,6 +7,7 @@ import Modal from "@material-ui/core/Modal";
 import { Button, Input } from "@material-ui/core";
 import ImageUpload from "./ImageUpload";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 
 function getModalStyle() {
   const top = 50;
@@ -37,6 +38,7 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [open, setOpen] = useState(false);
   const [openSignIn, setOpenSignIn] = useState(false);
+  const [addImage, setImage] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -105,6 +107,11 @@ function App() {
 
   return (
     <div className="App">
+      <Modal open={addImage} onClose={() => setImage(false)}>
+        <div style={modalStyle} className={classes.paper}>
+          {user?.displayName && <ImageUpload username={user.displayName} />}
+        </div>
+      </Modal>
       <Modal open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
           <form className="app__signup">
@@ -176,9 +183,13 @@ function App() {
           />
           {user ? (
             <div className="app__loginContainer">
-              <span>{user.displayName}</span>
-              {/* <Button>Logout</Button> */}
-              <ExitToAppIcon onClick={() => auth.signOut()} />
+              <div className="app_addImage">
+                <AddAPhotoIcon onClick={() => setImage(true)} />
+              </div>
+              <div className="app_userDetails">
+                <span>{user.displayName}</span>
+                <ExitToAppIcon onClick={() => auth.signOut()} />
+              </div>
             </div>
           ) : (
             <div className="app__loginContainer">
@@ -203,11 +214,12 @@ function App() {
         </center>
       </div>
 
-      {user?.displayName ? (
-        <ImageUpload username={user.displayName} />
+      {/* {user?.displayName ? (
+        // <ImageUpload username={user.displayName} />
+        <h4>sadasd</h4>
       ) : (
         <h3>Sorry you need to login to upload</h3>
-      )}
+      )} */}
     </div>
   );
 }

@@ -15,6 +15,10 @@ function ImageUpload({ username }) {
     }
   };
 
+  const handleClose = (e) => {
+    window.location.reload();
+  };
+
   const handleUpload = () => {
     const uploadTask = storage.ref(`/images/${image.name}`).put(image);
 
@@ -54,16 +58,33 @@ function ImageUpload({ username }) {
   };
 
   return (
-    <div className="imageUpload">
-      <progress className="imageUpload__progress" value={progress} max="100" />
-      <input
-        type="text"
-        placeholder="Enter a caption"
-        onChange={(e) => setCaption(e.target.value)}
-        value={caption}
-      />
-      <input type="file" onChange={handleChange} />
-      <Button onClick={handleUpload}>Upload</Button>
+    <div>
+      <center>
+        <h3>Upload an Image</h3>
+      </center>
+      <div className="imageUpload">
+        <progress
+          className="imageUpload__progress"
+          value={progress}
+          max="100"
+        />
+        <input
+          className="imageUpload__caption"
+          type="text"
+          placeholder="Enter a caption"
+          onChange={(e) => setCaption(e.target.value)}
+          value={caption}
+        />
+        <input
+          className="imageUpload__type"
+          type="file"
+          onChange={handleChange}
+        />
+        <div className="imageUpload__button">
+          <Button onClick={handleUpload}>Upload</Button>
+          <Button onClick={handleClose}>Close</Button>
+        </div>
+      </div>
     </div>
   );
 }

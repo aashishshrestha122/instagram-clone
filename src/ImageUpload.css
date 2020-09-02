@@ -12,4 +12,18 @@
 
 .imageUpload__progress {
   width: 100%;
+  margin-bottom: 10px;
+}
+
+.imageUpload__caption {
+  margin-bottom: 10px;
+}
+
+.imageUpload__type {
+  margin-bottom: 10px;
+}
+
+.imageUpload__button {
+  display: flex;
+  justify-content: space-between;
 }
